@@ -1,28 +1,122 @@
-.App {
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #ffffff;
+  line-height: 1.2;
+  padding: 1em;
+}
+
+.container {
+  max-width: 1350px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer {
+  background: #d2d5d6;
+  padding: 1em;
+  font-size: 0.8rem;
+  text-align: center;
+}
+/* Title */
+.title {
+  text-align: center;
+  background-color: #11ADDB;
+  color: #485e74;
+  padding: 0.1em;
+}
+
+.title h1 {
+  text-transform: uppercase;
+}
+
+.title span {
+  color: #ffffff;
+}
+
+/* Content */
+.content {
+  background: #92bde7;
+  color: #485e74;
+}
+
+#map {
+  width: 100%;
+  min-height: 600px;
+}
+
+.listview {
+  padding: 0.1em 1em;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.search {
+  width: 100%;
+  border-radius: 5px;
+  padding: 0.5em;
+  font-size: 1rem;
+  margin-bottom: 1rem;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.listview .list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
 }
 
-.App-title {
-  font-size: 1.5em;
+.listview .list a {
+  background-color: #e6eeef ;
+  text-align: center;
+  width: 100%;
+  min-width: 10rem;
+  display: inline-block;
+  transition-duration: 0.4s;
+  list-style: none;
+  border-radius: 5px;
+  margin: 5px auto;
+  padding: 10px 5px;
+  text-decoration: none;
 }
 
-.App-intro {
-  font-size: large;
+.listview .list a:hover {
+  background-color: #d3d9da;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.listview .list a:active {
+  color: green;
+}
+
+.error {
+  color: #ff0000;
+  padding-top: 5rem;
+  text-align: center;
+}
+
+/* Screen size 700px and up */
+@media(min-width: 700px) {
+  .content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+  .listview .list {
+    display: inline;
+    text-align: center;
+  }
+}
+
+/* Screen size 1000px and up */
+@media(min-width: 1000px) {
+  .content {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
 }
