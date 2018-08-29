@@ -1,21 +1,21 @@
-import React, {Component} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-class ListView extends Component {
+
+class ListView extends React.Component {
+  static propTypes = {
+    venue: PropTypes.object.isRequired
+  }
+
+  showInfoWindow = () => {
+    // Simulate a click on marker
+    window.google.maps.event.trigger(this.props.venue.marker,'click');
+  }
+
   render() {
-    return(
-      <div className="listview">
-        <h3>Places of Interest</h3>
-        <div>
-          <input className="search" type="text" placeholder="Filter by name"></input>
-          <ul className="list">
-          {
-            this.props.venues.map(venue => (
-              <li key={venue.id} className="list-item"><a href="" >{venue.name}</a></li>
-            ))
-          }
-          </ul>
-        </div>
-      </div>
+    const venue = this.props.venue
+    return (
+      <li key={venue.id} className="list-item"><p href='' onClick={this.showInfoWindow} onKeyPress={this.showInfoWindow} role='button' tabIndex='0'>{venue.name}</p></li>
     )
   }
 }

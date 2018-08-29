@@ -169,7 +169,6 @@ class App extends Component {
     const foursquareError = this.state.foursquareError
     const query = this.state.query
     const mapError = this.state.mapError
-    const filterVenues = this.state.filterVenues
     return (
       <div className="container" role="main">
         <div className="title" tabIndex="0">
@@ -181,11 +180,7 @@ class App extends Component {
           <h3>Places of Interest</h3>
           <div>
             <input className="search" type="text" placeholder="Filter by name" value={query} onChange={this.filterVenues} role='search' aria-labelledby='Name filter' tabIndex='0'></input>
-            <ul className="list">
-              {filterVenues.map(venue =>
-                <ListView venue={venue}/>
-              )}
-            </ul>
+            <ListView venues={this.state.filterVenues} onShowInfo={this.showInfo}/>
           </div>
         </div> 
         : 
@@ -211,3 +206,200 @@ export default scriptLoader([
 
 
 
+
+
+
+
+import React from 'react'
+import PropTypes from 'prop-types'
+
+function ListView(props) {
+  return(
+    <ul className="list">
+    {
+      props.venues.map(venue => (
+        <li key={venue.id} className="list-item"><a href='' onClick={props.onShowInfo} onKeyPress={props.onShowInfo} role='button' tabIndex='0'>{venue.name}</a></li>
+      ))
+    }
+    </ul>
+  )
+}
+
+ListView.propTypes = {
+  venues: PropTypes.array.isRequired,
+  onShowInfo: PropTypes.func.isRequired
+}
+
+export default ListView
+
+
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #ffffff;
+  line-height: 1;
+  padding: 1em;
+  font-size: 16px
+}
+
+.container {
+  max-width: 1350px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer {
+  background: #d2d5d6;
+  padding: 1em;
+  font-size: 0.8rem;
+  text-align: center;
+}
+/* Title */
+.title {
+  text-align: center;
+  background-color: #11ADDB;
+  color: #485e74;
+  padding: 0.1em;
+  font-size: 0.8em;
+}
+
+.title h1 {
+  text-transform: uppercase;
+}
+
+.title span {
+  color: #ffffff;
+}
+
+/* Content */
+.content {
+  background: #92bde7;
+  color: #485e74;
+  font-size: 0.8em;
+}
+
+#map {
+  width: 100%;
+  min-height: 400px;
+}
+
+.listview {
+  padding: 0.1em 1em;
+  text-align: center;
+
+}
+
+.search {
+  width: 100%;
+  border-radius: 5px;
+  padding: 0.5em;
+  margin-bottom: 1px;
+}
+
+.listview .list {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+.listview .list a {
+  background-color: #e6eeef ;
+  text-align: center;
+  width: auto;
+  min-width: 18em;
+  display: inline-block;
+  transition-duration: 0.4s;
+  list-style: none;
+  border-radius: 5px;
+  margin: 2px auto;
+  padding: 10px 5px;
+  text-decoration: none;
+  font-size: 1em;
+}
+
+.listview .list a:hover {
+  background-color: #d3d9da;
+}
+
+.listview .list a:active {
+  color: green;
+}
+
+.venue {
+  text-align: center;
+}
+
+.error {
+  color: #ff0000;
+  padding-top: 5rem;
+  text-align: center;
+}
+/* Screen size 400px and up */
+@media(min-width: 400px) {
+  .listview .list a {
+    min-width: 25em;
+  }
+}
+
+/* Screen size 700px and up */
+@media(min-width: 700px) {
+  .title {
+    font-size: 0.8rem;
+  }
+  .content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    font-size: 1em
+  }
+  #map {
+    width: 100%;
+    min-height: 600px;
+  }
+  .search {
+    margin-bottom: 1em;
+    font-size: 1em;
+  }
+  .listview .list {
+    display: inline;
+    text-align: center;
+  }
+  .listview .list a {
+    margin: 5px auto;
+    width: 100%;
+    min-width: 11em;
+    font-size: 0.85em;
+  }
+}
+
+/* Screen size 800px and up */
+@media(min-width: 800px) {
+  .listview .list a {
+    font-size: 1em;
+  }
+}
+
+
+/* Screen size 1070px and up */
+@media(min-width: 1070px) {
+  body {
+    line-height: 1.2;
+  }
+  
+  .content {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    /* font-size: 1.1em */
+  }
+}
