@@ -8,11 +8,11 @@ import { Venues } from './components/Venues'
 import { GoogleMapKey } from './apiKey/GoogleKey'
 import { ClientID, ClientSecret } from './apiKey/FoursquareKey'
 import './App.css';
+
 class App extends Component {
 
   state = {
     map: {},
-    // bounds: {},
     infoWindow: {},
     mapError: false,
     foursquareError: false,
@@ -26,10 +26,7 @@ class App extends Component {
     query: ''
   }
 
-  // componentDidMount() {
-  //   this.getVenues()
-  // }
-
+  // Get Venues data then setup the map
   componentWillReceiveProps({isScriptLoadSucceed}) {
     // Google map script load successfully
     if(isScriptLoadSucceed) {
@@ -66,6 +63,7 @@ class App extends Component {
             venues: [...state.venues,response.data.response.venue],
             filterVenues: [...state.venues,response.data.response.venue].sort(sortBy('name'))
           }))
+          // Setup the map
           this.initMap()
           // Add markers
           this.addMarkers(this.state.venues)
@@ -161,10 +159,6 @@ class App extends Component {
     })
   }
 
-  showInfo = (venue) => {
-    window.google.maps.event.trigger(venue.marker,'click');
-  }
-
   render() {
     const foursquareError = this.state.foursquareError
     const query = this.state.query
@@ -205,7 +199,6 @@ class App extends Component {
 }
 
 export default scriptLoader([
-  // `https://maps.googleapis.com/maps/api/js?&v=3`
   `https://maps.googleapis.com/maps/api/js?key=${GoogleMapKey}&v=3`
 ])(App)
 
