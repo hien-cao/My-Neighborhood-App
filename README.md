@@ -12,7 +12,7 @@
 
 This app introduces my interested places in Helsinki where is my neighbor town. The app is the final project for Udacity Front-End Nanodegee. The project is built by html, css, Javascript, react js, and creat-react-app.
 
-The data used for the app is requested from Google Maps API and Foursquare API. A list of favorite places' data is requested from Foursquare then render in Google map. The places include restaurant, coffee shop, and sigtseeings. 
+The data used for the app is requested from Google Maps API and Foursquare API. A list of favorite places' data is requested from Foursquare then rendered in Google map. The places include restaurant, coffee shop, and sightseeings. 
 
 ## Requirement
 
@@ -27,11 +27,11 @@ The data used for the app is requested from Google Maps API and Foursquare API. 
 
 ## How to use the app
 
-1. The app display my favorite places in Helsinki
+1. The app displays my favorite places in Helsinki
 
-2. Users can filter the name of the place in the filter box
+2. User can filter the name of the place in the filter box
 
-3. Users can check for detail info about the place by click on the name or the marker on the map. The info shows the name, address, rating and foursquare link of the places
+3. User can check for detail info about the place by click on the name or the marker on the map. The info shows the name, address, rating and foursquare link of the places
 
 ## Resources
 
