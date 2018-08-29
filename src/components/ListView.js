@@ -8,14 +8,11 @@ class ListView extends Component {
         <div>
           <input className="search" type="text" placeholder="Filter by name"></input>
           <ul className="list">
-            <li><a href="" className="list-item">Starbuck 1</a></li>
-            <li><a href="" className="list-item">Starbuck 2</a></li>
-            <li><a href="" className="list-item">Starbuck 3</a></li>
-            <li><a href="" className="list-item">Starbuck 4</a></li>
-            <li><a href="" className="list-item">Starbuck 5</a></li>
-            <li><a href="" className="list-item">Starbuck 6</a></li>
-            <li><a href="" className="list-item">Starbuck 7</a></li>
-            <li><a href="" className="list-item">Starbuck 8</a></li>
+          {
+            this.props.venues.map(venue => (
+              <li key={venue.id} className="list-item"><a href="" >{venue.name}</a></li>
+            ))
+          }
           </ul>
         </div>
       </div>

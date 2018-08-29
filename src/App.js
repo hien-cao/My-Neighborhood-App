@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import scriptLoader from 'react-async-script-loader'
-import './App.css';
+import axios from 'axios'
 import ListView from './components/ListView'
+import { Venues } from './components/Venues'
 import { GoogleMapKey } from './apiKey/GoogleKey'
+import { ClientID, ClientSecret } from './apiKey/FoursquareKey'
+import './App.css';
 class App extends Component {
 
   state = {
@@ -10,13 +13,19 @@ class App extends Component {
     bounds: {},
     infoWindow: {},
     mapError: false,
+    foursquareError: false,
     // Data for map
     mapCenter: {lat: 60.170567, lng: 24.940657},
     mapZoom: 13,
-    mapTypeControl: false
+    mapTypeControl: false,
+    // List of venues (locations)
+    venues: []
   }
 
-  
+  componentDidMount() {
+    this.getVenues()
+  }
+
   componentWillReceiveProps({isScriptLoadSucceed}) {
     // Google map script load successfully
     if(isScriptLoadSucceed) {
@@ -29,7 +38,7 @@ class App extends Component {
     }
   }
   
-  // 
+  // Set up Google Map
   initMap = () => {
     // Create the Google map
     const map = new window.google.maps.Map(document.getElementById('map'), {
@@ -49,17 +58,45 @@ class App extends Component {
     })
   }
 
+  // Get list of venues (locations) from Foursquare
+  getVenues = () => {
+    for (let venueid of Venues) {
+      const url = `https://api.foursquare.com/v2/venues/${venueid.venueid}?client_id=${ClientID}&client_secret=${ClientSecret}&v=20180828`
+      axios.get(url)
+        .then(response => {
+          this.setState(state => ({
+            venues: [...state.venues,response.data.response]
+          }))
+        })
+        .catch(error => {
+          console.log('Error! ' + error)
+          this.setState({
+            foursquareError: true
+          })
+        })
+    }
+  }
+
   render() {
+    const {map, bounds, infoWindow, mapError, foursquareError, mapCenter, mapZoom, mapTypeControl, venues} = this.state
+
     return (
-      <div className="container">
-        <div className="title">
+      <div className="container" role="main">
+        <div className="title" tabIndex="0">
           <h1>City of <span>Helsinki</span></h1>
           <p>A list of favorite places</p>
         </div>
         <div className="content">
-          <ListView/>
+          {!foursquareError ? <ListView 
+            map={map}
+            bounds={bounds}
+            infoWindow={infoWindow}
+            venues={venues.map(e => e.venue)}
+          /> : <div className="listview">
+            <h3>Error while loading Foursquare data. Please try again later!</h3>
+          </div>}
           <div id='map' role='application'>
-            {this.state.mapError &&
+            {mapError &&
               <h2 className='error'>Map loading error!</h2>
             }
           </div>
@@ -71,6 +108,6 @@ class App extends Component {
 }
 
 export default scriptLoader([
-  `https://maps.googleapis.com/maps/api/js?&v=3&callback=initMap`
-  // `https://maps.googleapis.com/maps/api/js?key=${GoogleMapKey}&v=3`
+  // `https://maps.googleapis.com/maps/api/js?&v=3`
+  `https://maps.googleapis.com/maps/api/js?key=${GoogleMapKey}&v=3`
 ])(App)
