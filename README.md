@@ -1,16 +1,20 @@
 # My Neighborhood Map (Udacity FEND)
 
+![Part of the Udacity Front-End Web Development Nanodegree](https://img.shields.io/badge/Udacity-Front--End%20Web%20Developer%20Nanodegree-02b3e4.svg)
+
 ## Table of Contents
 
-* [About](#About)
-* [Requirement](#Requirement)
-* [How to run](#How)
-* [How to use the app](#How)
-* [Resources](#Resources)
+- [My Neighborhood Map (Udacity FEND)](#my-neighborhood-map-udacity-fend)
+  - [Table of Contents](#table-of-contents)
+  - [About](#about)
+  - [Requirement](#requirement)
+  - [How to run](#how-to-run)
+  - [How to use the app](#how-to-use-the-app)
+  - [Resources](#resources)
 
 ## About
 
-This app introduces my interested places in Helsinki where is my neighbor town. The app is the final project for Udacity Front-End Nanodegee. The project is built by html, css, Javascript, react js, and creat-react-app.
+This app introduces my interested places in Helsinki where is my neighbor town. The app is the final project for Udacity Front-End Nanodegee. The project is built by HTML, CSS, JavaScript, React.js, and creat-react-app.
 
 The data used for the app is requested from Google Maps API and Foursquare API. A list of favorite places' data is requested from Foursquare then rendered in Google map. The places include restaurant, coffee shop, and sightseeings. 
 
